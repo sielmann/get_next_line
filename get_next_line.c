@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/09/21 13:27:02 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:51:55 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -53,8 +53,11 @@ char *get_line(char *stash)
 
   i = 0;
   line_len = 0;
+  //if (stash[0] == '\n')
+  //	line_len = 1;
   while(stash[line_len] != '\n')
 	line_len++;
+  //printf("line len: %d\n", line_len);
   line = (char *)malloc(sizeof(char) * (line_len + 1));
   if (!line)
 	{
@@ -87,9 +90,11 @@ char *trim_tha_stash(char *stash)
 	  return (NULL);
 	}
   i = 0;
+  //if (stash[i] == '\n')
+  //	i = 1;
   while (stash[i] != '\0')
 	{
-	  new_stash[i] = stash[start + i];
+	  new_stash[i] = stash[start  + 1 + i];
 	  i++;
 	}
   new_stash[i] = '\0';
@@ -114,7 +119,7 @@ char *get_next_line(int fd)
 		  return (NULL);
 		}
 	}
-  printf("stash: %s\n", stash);
+  //printf("stash: %s\n", stash);
   line = get_line(stash);
   if (!line)
 	{
@@ -128,10 +133,10 @@ char *get_next_line(int fd)
 	  stash = free_stash(stash);
 	  return (NULL);
 	}
-  //printf("line: %s\n", line);
+  printf("line: %s\n", line);
    return (line);
 }
-
+/*
 int main(int argc, char **argv)
 {
   int fd;
@@ -143,7 +148,11 @@ int main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
  get_next_line(fd);
  get_next_line(fd);
+ get_next_line(fd);
+ get_next_line(fd);
+ get_next_line(fd);
  //get_next_line(fd);
  //get_next_line(fd);
   return (0);
 }
+*/
