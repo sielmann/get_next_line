@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:19:17 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/03 12:59:07 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:58:22 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ char	*ft_strjoin(char *s1, const char *s2)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	while (i < len1)
+	while (i < ft_strlen(s1))
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (j < len2)
+	while (j < ft_strlen(s2))
 	{
 		str[i + j] = s2[j];
 		j++;
@@ -82,7 +82,6 @@ char	*ft_strjoin(char *s1, const char *s2)
 	return (str);
 }
 
-/*
 int	ft_strlenc(const char *s, int c)
 {
 	int	len;
@@ -94,7 +93,7 @@ int	ft_strlenc(const char *s, int c)
 		len++;
 	return (len);
 }
-
+/*
 char	*ft_strjoin_and_free(char *s1, const char *s2)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/03 13:33:23 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:59:11 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -135,7 +135,7 @@ char	*get_next_line(int fd)
 	printf("line: %s\n", line);
 	return (line);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	int	fd;
@@ -153,3 +153,4 @@ int	main(int argc, char **argv)
 	//get_next_line(fd);
 	return (0);
 }
+*/
