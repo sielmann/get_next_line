@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/09/21 13:51:55 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:25:30 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -33,7 +33,7 @@ char *read_stash(int fd, char *stash)
 		  return (NULL);
 		}
 	  buffer[bytes_r] = '\0';
-	  stash = ft_strjoin_and_free(stash, buffer);
+	  stash = ft_strjoin(stash, buffer);
 	  if (!stash)
 		{
 		  buffer = free_stash(buffer);
@@ -136,7 +136,7 @@ char *get_next_line(int fd)
   printf("line: %s\n", line);
    return (line);
 }
-/*
+
 int main(int argc, char **argv)
 {
   int fd;
@@ -150,9 +150,8 @@ int main(int argc, char **argv)
  get_next_line(fd);
  get_next_line(fd);
  get_next_line(fd);
- get_next_line(fd);
- //get_next_line(fd);
+ // get_next_line(fd);
  //get_next_line(fd);
   return (0);
 }
-*/
+
