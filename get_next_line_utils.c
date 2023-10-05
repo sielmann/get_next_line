@@ -6,34 +6,23 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:19:17 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/05 15:50:28 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:07:18 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen_till_c(const char *s, int c)
 {
-	size_t	i;
+	int	len;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	len = 0;
+	if (!s)
+		return (0);
+	while (s && s[len] != '\0' && s[len] != (unsigned char)c)
+		len++;
+	return (len);
 }
-
-int ft_strlen_till_c(const char *s, int c)
-{
-    int len;
-
-    len = 0;
-    if (!s)
-        return (0);
-    while (s && s[len] != '\0' && s[len] != (unsigned char)c)
-        len++;
-    return (len);
-}
-
 
 char	*free_stash(char *stash)
 {
@@ -62,30 +51,19 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_letsjoin(char *str, char *s1, const char *s2)
 {
-	char	*str;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	if (!s1)
-	{
-		s1 = (char *)malloc(sizeof(char) * 1);
-		if (!s1)
-			return (NULL);
-		*s1 = '\0';
-	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (i < ft_strlen(s1))
+	while (i < ft_strlen_till_c(s1, '\0'))
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (j < ft_strlen(s2))
+	while (j < ft_strlen_till_c(s2, '\0'))
 	{
 		str[i + j] = s2[j];
 		j++;
@@ -95,31 +73,25 @@ char	*ft_strjoin(char *s1, const char *s2)
 	return (str);
 }
 
-/*
-char	*ft_strjoin_and_free(char *s1, const char *s2)
+char	*ft_strjoin(char *s1, const char *s2)
 {
-	int		i;
-	int		j;
-	char	*new;
+	char	*str;
+	int		s1_len;
+	int		s2_len;
 
 	if (!s1)
 	{
-		s1 = malloc (1);
+		s1 = (char *)malloc(sizeof(char) * 1);
 		if (!s1)
 			return (NULL);
-		*s1 = K_ES;
+		*s1 = '\0';
 	}
-	new = (char *)malloc((ft_strlenc(s1, K_ES) + ft_strlenc(s2, K_ES) + 1));
-	if (!new)
+	s1_len = ft_strlen_till_c(s1, '\0');
+	s2_len = ft_strlen_till_c(s2, '\0');
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
 		return (NULL);
-	i = -1;
-	while (s1[++i])
-	new[i] = s1[i];
-	j = 0;
-	while (s2[j])
-		new[i++] = s2[j++];
-	new[i] = K_ES;
-	s1 = free_stash(s1);
-	return (new);
+	str = ft_letsjoin(str, s1, s2);
+	//	s1 = free_stash(s1);
+	return (str);
 }
-*/

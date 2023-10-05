@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/05 16:45:46 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:17:02 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	*trim_tha_stash(char *stash)
 	int		start;
 	int		end;
 	char	*new_stash;
-	int		i;
 
 	start = ft_strlen_till_c(stash, '\n');
 	end = ft_strlen_till_c(stash, '\0');
@@ -148,7 +147,6 @@ char	*get_next_line(int fd)
 		stash = free_stash(stash);
 		return (NULL);
 	}
-	printf("line: %s\n", line);
-	printf("%p\n", line);
+	printf("%s\n", line);
 	return (line);
 }

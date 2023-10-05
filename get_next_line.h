@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:19:32 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/05 15:27:47 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:03:24 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ char	*ft_strjoin(char *s1, const char *s2);
 char	*free_stash(char *stash);
 char	*ft_strjoin_and_free(char *s1, const char *s2);
 int		ft_strlen_till_c(const char *s, int c);
-
+char	*ft_letsjoin(char *str, char *s1, const char *s2);
 #endif

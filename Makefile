@@ -6,7 +6,7 @@
 #    By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 13:46:33 by chrmarti          #+#    #+#              #
-#    Updated: 2023/10/05 14:49:20 by chrmarti         ###   ########.fr        #
+#    Updated: 2023/10/05 18:04:41 by chrmarti         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ CFLAGS = -D BUFFER_SIZE=42 -MMD
 
 RM = rm -f
 
-SRCS =  get_next_line.c get_next_line_utils.c
+SRCS = main.c get_next_line.c get_next_line_utils.c
 OBJS = $(SRCS:%.c=%.o)
 DEPS = $(OBJS:%.o=%.d)
 
