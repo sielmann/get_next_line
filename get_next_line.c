@@ -6,9 +6,10 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/03 13:59:11 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:45:46 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*read_stash(int fd, char *stash)
@@ -52,11 +53,10 @@ char	*get_line(char *stash)
 
 	i = 0;
 	line_len = 0;
-	//if (stash[0] == '\n')
-	//	line_len = 1;
+	if (stash[line_len] == '\n')
+		line_len = 1;
 	while (stash[line_len] != '\n')
 		line_len++;
-	//printf("line len: %d\n", line_len);
 	line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
 	{
@@ -72,6 +72,27 @@ char	*get_line(char *stash)
 	return (line);
 }
 
+char	*shorten_new_stash(char *stash, char *new_stash, int start)
+{
+	int	i;
+
+	i = 0;
+	while (stash[i] != '\0')
+	{
+		new_stash[i] = stash[start + 1 + i];
+		i++;
+	}
+	if (!new_stash)
+	{
+		new_stash = free_stash(new_stash);
+		stash = free_stash(stash);
+		return (NULL);
+	}
+	new_stash[i] = '\0';
+	stash = free_stash(stash);
+	return (new_stash);
+}
+
 char	*trim_tha_stash(char *stash)
 {
 	int		start;
@@ -79,8 +100,8 @@ char	*trim_tha_stash(char *stash)
 	char	*new_stash;
 	int		i;
 
-	start = ft_strlenc(stash, '\n');
-	end = ft_strlenc(stash, '\0');
+	start = ft_strlen_till_c(stash, '\n');
+	end = ft_strlen_till_c(stash, '\0');
 	new_stash = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!new_stash)
 	{
@@ -88,17 +109,13 @@ char	*trim_tha_stash(char *stash)
 		stash = free_stash(stash);
 		return (NULL);
 	}
-	i = 0;
-	//if (stash[i] == '\n')
-	//i = 1;
-	while (stash[i] != '\0')
+	new_stash = shorten_new_stash(stash, new_stash, start);
+	if (!new_stash)
 	{
-		new_stash[i] = stash[start + 1 + i];
-		i++;
+		new_stash = free_stash(new_stash);
+		stash = free_stash(stash);
+		return (NULL);
 	}
-	new_stash[i] = '\0';
-	//printf("new stash: %s\n", new_stash);
-	stash = free_stash(stash);
 	return (new_stash);
 }
 
@@ -118,7 +135,6 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 	}
-	//printf("stash: %s\n", stash);
 	line = get_line(stash);
 	if (!line)
 	{
@@ -133,24 +149,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	printf("line: %s\n", line);
+	printf("%p\n", line);
 	return (line);
 }
-/*
-int	main(int argc, char **argv)
-{
-	int	fd;
-
-	fd = 0;
-	if (argc == 1)
-		fd = open("text1.txt", O_RDONLY);
-	else
-		fd = open(argv[1], O_RDONLY);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
-	//get_next_line(fd);
-	//get_next_line(fd);
-	return (0);
-}
-*/

@@ -6,11 +6,11 @@
 #    By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 13:46:33 by chrmarti          #+#    #+#              #
-#    Updated: 2023/10/03 13:46:39 by chrmarti         ###   ########.fr        #
+#    Updated: 2023/10/05 14:49:20 by chrmarti         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = get_next_line.a
+NAME = get_next_line
 HEADER = get_next_line.h
 
 CC = cc

@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:19:17 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/03 13:58:22 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:50:28 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+int ft_strlen_till_c(const char *s, int c)
+{
+    int len;
+
+    len = 0;
+    if (!s)
+        return (0);
+    while (s && s[len] != '\0' && s[len] != (unsigned char)c)
+        len++;
+    return (len);
+}
+
 
 char	*free_stash(char *stash)
 {
@@ -51,9 +64,9 @@ char	*ft_strchr(const char *str, int c)
 
 char	*ft_strjoin(char *s1, const char *s2)
 {
-	char			*str;
-	unsigned int	i;
-	unsigned int	j;
+	char	*str;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -82,17 +95,6 @@ char	*ft_strjoin(char *s1, const char *s2)
 	return (str);
 }
 
-int	ft_strlenc(const char *s, int c)
-{
-	int	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (s && s[len] != '\0' && s[len] != (unsigned char)c)
-		len++;
-	return (len);
-}
 /*
 char	*ft_strjoin_and_free(char *s1, const char *s2)
 {
