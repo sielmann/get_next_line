@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:45:14 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/05 18:06:29 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:23:54 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ int	main(int argc, char **argv)
 	i = 0;
 	fd = 0;
 	if (argc == 1)
-		fd = open("text1.txt", O_RDONLY);
+	{
+		fd = open("hola.txt", O_RDONLY);
+		if (!fd)
+			return (1);
+	}
 	else
 		fd = open(argv[1], O_RDONLY);
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
+	if (!fd)
+		return (1);
 	get_next_line(fd);
 	return (0);
 }
