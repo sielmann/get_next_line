@@ -6,13 +6,13 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:19:17 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/09 15:17:41 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:39:17 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen_till_c(const char *s, int c)
+int	ft_strlenc(const char *s, int c)
 {
 	int	len;
 
@@ -24,32 +24,28 @@ int	ft_strlen_till_c(const char *s, int c)
 	return (len);
 }
 
-char	*free_stash(char *stash)
+char	*free_null(char *stash)
 {
 	free(stash);
 	stash = NULL;
 	return (NULL);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	char	cc;
 	int		i;
 	char	*s_cpy;
 
 	i = 0;
-	s_cpy = (char *)str;
-	cc = (char)c;
-	while (s_cpy[i])
-	{
-		if (s_cpy[i] == cc)
-			return (&s_cpy[i]);
-		i++;
-	}
-	if (cc == '\0')
-		return (&s_cpy[i]);
+	if (!s)
+	  return (NULL);
+	s_cpy = (char *)s;
+	while (s_cpy && s_cpy[i] && s_cpy[i] != (char)c)
+	  i++;
+	if (s_cpy[i] == (char) c)
+	  return (&s_cpy[i]);
 	return (NULL);
-}
+	}
 
 char	*ft_letsjoin(char *str, char *s1, const char *s2)
 {
@@ -58,22 +54,22 @@ char	*ft_letsjoin(char *str, char *s1, const char *s2)
 
 	i = 0;
 	j = 0;
-	while (i < ft_strlen_till_c(s1, '\0'))
+	while (i < ft_strlenc(s1, '\0'))
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (j < ft_strlen_till_c(s2, '\0'))
+	while (j < ft_strlenc(s2, '\0'))
 	{
 		str[i + j] = s2[j];
 		j++;
 	}
 	str[i + j] = '\0';
-	s1 = free_stash(s1);
+	s1 = free_null(s1);
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_strjoin_and_free(char *s1, const char *s2)
 {
 	char	*str;
 	int		s1_len;
@@ -86,8 +82,8 @@ char	*ft_strjoin(char *s1, const char *s2)
 			return (NULL);
 		*s1 = '\0';
 	}
-	s1_len = ft_strlen_till_c(s1, '\0');
-	s2_len = ft_strlen_till_c(s2, '\0');
+	s1_len = ft_strlenc(s1, '\0');
+	s2_len = ft_strlenc(s2, '\0');
 	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!str)
 		return (NULL);

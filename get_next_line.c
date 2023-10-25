@@ -6,7 +6,7 @@
 /*   By: chrmarti <chrmarti@student.42barc...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 15:18:37 by chrmarti          #+#    #+#             */
-/*   Updated: 2023/10/09 15:15:00 by chrmarti         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:34:09 by chrmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*read_stash(int fd, char *stash)
 		stash = free_stash(stash);
 		return (NULL);
 	}
-	while (bytes_r > 0 || !ft_strchr(stash, '\n'))
+	while (bytes_r > 0 || !(ft_strchr(stash, '\n')))
 	{
 		bytes_r = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_r == -1)
@@ -51,16 +51,24 @@ char	*get_line(char *stash)
 	if (stash[0] == '\0')
 		return (NULL);
 	line_len = ft_strlen_till_c(stash, '\n');
+	/*i = ft_strlen_till_c(stash, '\n');
+	if (stash[i] == '\0')
+	  line = (char *)malloc(sizeof(char) * (i + 1));
+	else
+	  line = (char *)malloc(sizeof(char) * (i + 2));
+	*/
 	if (stash[line_len] == '\n')
 		line_len++;
-	line = (char *)malloc(sizeof(char) * (line_len + 1));
+		line = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!line)
 		return (NULL);
 	while (i < line_len)
-	{
+	  {
 		line[i] = stash[i];
 		i++;
-	}
+	  }
+	/*	if (stash[i] == '\n')
+		line[i++] = '\n';*/
 	line[i] = '\0';
 	return (line);
 }
@@ -96,12 +104,15 @@ char	*trim_tha_stash(char *stash)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash;
+	static char	*stash = NULL;
 
-	if (fd <= 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
+	  {
+		free (stash);
 		return (NULL);
+	  }
 	printf("FD VALUE = %d\n", fd);
-	if (!stash || !ft_strchr(stash, '\n'))
+	if (!stash || (!ft_strchr(stash, '\n')))
 		stash = read_stash(fd, stash);
 	if (!stash)
 		return (NULL);
@@ -112,6 +123,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	stash = trim_tha_stash(stash);
-	printf("%s", line);
-	return (line);
+   	return (line);
 }
